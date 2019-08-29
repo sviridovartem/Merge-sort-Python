@@ -1,5 +1,6 @@
 import logging
 import doctest
+import unittest
 
 
 def merge(input_list, left_part, right_part):
@@ -34,10 +35,9 @@ def merge(input_list, left_part, right_part):
 
 
 def merge_sort(input_list):
-    """Возвращает факториал числа n, которое является числом >= 0.
-
-        Если резульатат умещается в int, возвращается int.
-        Иначе возвращается long.
+    """Merge sort is an efficient, general-purpose, comparison-based sorting algorithm.
+    Most implementations produce a stable sort,
+    which means that the order of equal elements is the same in the input and output.
 
         >>> merge_sort([15, 13, 11, 16, 18, 69, 46, 22, 11, 10, 8, 5, 8])
         [5, 8, 8, 10, 11, 11, 13, 15, 16, 18, 22, 46, 69]
@@ -45,29 +45,36 @@ def merge_sort(input_list):
         [5, 8, 9, 10, 11, 11, 13, 15, 16, 18, 22, 46, 69]
 
         """
+    if input_list:
+        if all(isinstance(item, int or float or str) for item in input_list) or not any(
+                isinstance(item, str) for item in input_list):
+            logging.info('Inside splitting part')
+            if len(input_list) > 1:
+                left_part = input_list[:len(input_list) // 2]
+                right_part = input_list[len(input_list) // 2:]
 
-    logging.info('Inside splitting part')
-    if len(input_list) > 1:
-        left_part = input_list[:len(input_list) // 2]
-        right_part = input_list[len(input_list) // 2:]
+                merge_sort(left_part)
+                merge_sort(right_part)
 
-        merge_sort(left_part)
-        merge_sort(right_part)
+                logging.info('Starting merging')
+                merge(input_list, left_part, right_part)
+                logging.info('Finished merging')
+            return input_list
+        else:
+            return "Different types inside your list"
+    else:
+        return input_list
 
-        logging.info('Starting merging')
-        merge(input_list, left_part, right_part)
-        logging.info('Finished merging')
-    return input_list
 
 def main():
-    logging.basicConfig(filename='merge_sort.log', filemode='w', level=logging.INFO)
+    logging.basicConfig(filename='merge_sort_log.log', filemode='w', level=logging.INFO)
     logging.info('Started')
 
     test_list = [15, 13, 11, 16, 18, 69, 46, 22, 11, 10, 8, 5, 8]
-    print(test_list)
+    # print(test_list)
 
     merge_sort(test_list)
-    print("return {}".format(merge_sort(test_list)))
+    # print("return {}".format(merge_sort(test_list)))
 
     logging.info('Finished')
 
