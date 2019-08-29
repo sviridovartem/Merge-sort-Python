@@ -1,6 +1,5 @@
 import logging
 import doctest
-import unittest
 
 
 def merge(input_list, left_part, right_part):
@@ -43,7 +42,6 @@ def merge_sort(input_list):
         [5, 8, 8, 10, 11, 11, 13, 15, 16, 18, 22, 46, 69]
         >>> merge_sort([15, 13, 11, 16, 18, 69, 46, 22, 11, 10, 8, 5, 9])
         [5, 8, 9, 10, 11, 11, 13, 15, 16, 18, 22, 46, 69]
-
         """
     if input_list:
         if all(isinstance(item, int or float or str) for item in input_list) or not any(
@@ -71,11 +69,7 @@ def main():
     logging.info('Started')
 
     test_list = [15, 13, 11, 16, 18, 69, 46, 22, 11, 10, 8, 5, 8]
-    # print(test_list)
-
-    merge_sort(test_list)
-    # print("return {}".format(merge_sort(test_list)))
-
+    print("return {}".format(merge_sort(test_list)))
     logging.info('Finished')
 
 
