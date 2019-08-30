@@ -23,15 +23,15 @@ class TestSortMethods(unittest.TestCase):
                          sorted([-15, -13, -11, 16, -18, 69, -46, 22, -11, 0, -8, -5, -8]))
 
     def test_mixed_types_inside_list(self):
-        # it pass in case if it has all elements int, float, str
-        # it pass in case if it has mix of int, float
-        # it fails in case it has mix of int, float and it has any str element
+        self.assertRaises(ValueError, my_sort.merge_sort, [4, "f", "t", "p", "g", "f", "e", "p"])
 
-        self.assertEqual(my_sort.merge_sort([4, "f", "t", "p", "g", "f", "e", "p"]), "Different types inside your list")
+    def test_mixed_types_inside_list1(self):
+        self.assertRaises(TypeError, my_sort.merge_sort, [4, "f", "t", "p", "g", "f", "e", "p"],
+                          [4, "f", "t", "p", "g", "f", "e", "p"])
 
 
 def main():
-    test_list = [15, 13, 11, 16, 18, 69, 46, 22, 11, 10, 8, 5, 8]
+    test_list = [[{1, 2, 3, 4, 4, 5}, {13, 2, 4, 5, 6, }]]
     print(my_sort.merge_sort(test_list))
 
 
